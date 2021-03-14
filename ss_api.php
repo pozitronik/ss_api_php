@@ -62,6 +62,15 @@ class ss_api {
 		return $this->curl_exec();
 	}
 
+	/**
+	 * @param string $event Event name
+	 * @param int|null $min_value Optional minimum numeric value for event
+	 * @param int|null $max_value Optional maximum numeric value for event
+	 * @param int|null $icon_id Optional id specifying what icon is displayed next to the event in the SteelSeries Engine UI (see ss_icons constants).
+	 * @param bool|null $value_optional If the value_optional key is set to true for an event, the handlers for the event will be processed each time it is updated, even if a value key is not specified in the data or if the value key matches the previously cached value.
+	 * This is mainly useful for events that use context data rather than the event value to determine what to display, such as some OLED screen events or for bitmap type lighting events.
+	 * @return array
+	 */
 	public function register_game_event(string $event, ?int $min_value = null, ?int $max_value = null, ?int $icon_id = null, ?bool $value_optional = null):array {
 		$this->curl_init("{$this->host}:{$this->port}/register_game_event");
 		$payload['game'] = $this->game;
